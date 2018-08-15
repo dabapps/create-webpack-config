@@ -1,2 +1,3 @@
-# webpack-config
-DabApps' common webpack config
+# Webpack Config
+
+**DabApps' common webpack config**
