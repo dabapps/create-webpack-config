@@ -4,6 +4,8 @@
   "description": "DabApps' common webpack config",
   "main": "webpack.config.js",
   "scripts": {
+    "tests": "echo \"No tests!\" && exit 1",
+    "lint": "eslint .",
     "test": "npm run lint && npm run tests"
   },
   "repository": {
@@ -43,6 +45,11 @@
     "typescript": ">= 2",
     "webpack": "^4.16.5",
     "webpack-cli": ">= 3"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-dabapps": "github:dabapps/eslint-config-dabapps",
+    "prettier": "^1.14.2"
   },
   "peerDependencies": {
     "typescript": ">= 2",
