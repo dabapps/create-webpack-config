@@ -160,11 +160,9 @@ function createWebpackConfig(options) {
       new CircularDependencyPlugin({
         failOnError: true,
         exclude: /node_modules/,
-        cwd: process.cwd(),
+        cwd: CWD,
       }),
-      new EnvironmentPlugin({
-        NODE_ENV: 'production',
-      }),
+      new EnvironmentPlugin(options.env || {}),
     ],
   };
 }
