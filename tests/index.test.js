@@ -104,6 +104,22 @@ describe('createWebpackConfig', () => {
     expect(unsureAboutAliases).toThrow(/rootDir/);
   });
 
+  it('should use rootDir if provided', () => {
+    const config = createWebpackConfig({
+      input: {
+        frontend: 'src/index.ts',
+        admin: 'src/admin.ts',
+      },
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+      rootDir: 'wat',
+    });
+
+    expect(config.resolve.alias).toEqual({
+      '^': path.resolve(CWD, 'wat'),
+    });
+  });
+
   it('should create rules without raw files if no extensions provided', () => {
     const config1 = createWebpackConfig({
       input: 'src/index.ts',
