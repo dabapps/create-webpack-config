@@ -5,6 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CWD = process.cwd();
 const POLYFILLS = ['babel-polyfill', 'raf/polyfill'];
+const MATCHES_LEADING_DOT = /^./;
 
 function validateOptions(options) {
   if (!options || typeof options !== 'object' || Array.isArray(options)) {
@@ -52,6 +53,10 @@ function validateOptions(options) {
   ) {
     throw new Error('Invalid "env" option - must be a keyed object');
   }
+
+  if (!Array.isArray(options.rawFileExtensions)) {
+    throw new Error('Invalid "rawFileExtensions" option - must be an array');
+  }
 }
 
 function createEntry(options) {
@@ -68,12 +73,21 @@ function createEntry(options) {
   return entry;
 }
 
+function createFileExtensionRegex(options) {
+  const joinedExtensions = options.rawFileExtensions.map((extension) => {
+    return extension.trim().replace(MATCHES_LEADING_DOT, '');
+  }).join('|');
+
+  return new RegExp(`\\.(?:${joinedExtensions})\$`);
+}
+
 function createWebpackConfig(options) {
   validateOptions(options);
 
   const entry = createEntry(options);
   const outFile = Array.isArray(entry) ? 'bundle.js' : '[name]-bundle.js';
   const outDir = path.resolve(CWD, options.outDir);
+  const rawTestRegex = createFileExtensionRegex(options);
 
   return {
     performance: {
@@ -91,7 +105,7 @@ function createWebpackConfig(options) {
     module: {
       rules: [
         {
-          test: /\.(?:html|txt|xml|csv)$/,
+          test: rawTestRegex,
           use: 'raw-loader',
         },
         {
