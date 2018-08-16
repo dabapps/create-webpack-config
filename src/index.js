@@ -78,17 +78,61 @@ function createEntry(options) {
 
   const entry = {};
 
-  Object.keys(options.input).forEach((key) => {
+  Object.keys(options.input).forEach(key => {
     entry[key] = POLYFILLS.concat(path.resolve(CWD, options.input[key]));
   });
 
   return entry;
 }
 
+function getRootDir(options) {
+  if (typeof options.rootDir === 'string') {
+    return path.resolve(CWD, options.rootDir);
+  }
+
+  if (typeof options.input === 'string') {
+    return path.dirname(path.resolve(CWD, options.input));
+  }
+
+  const dirs = [];
+
+  Object.keys(options.input).forEach(key => {
+    const dir = path.dirname(path.resolve(CWD, options.input[key]));
+
+    if (dirs.indexOf(dir) < 0) {
+      throw new Error(
+        'More than one possible root directory - please specify a "rootDir" option'
+      );
+    }
+
+    dirs.push(dir);
+  });
+
+  return dirs[0];
+}
+
+function getIncludeDirs(options) {
+  if (typeof options.input === 'string') {
+    return path.dirname(path.resolve(CWD, options.input));
+  }
+
+  const dirs = [];
+
+  Object.keys(options.input).forEach(key => {
+    const dir = path.dirname(path.resolve(CWD, options.input[key]));
+
+    dirs.push(dir);
+  });
+
+  return dirs;
+}
+
 function createFileExtensionRegex(options) {
-  const joinedExtensions = options.rawFileExtensions.map((extension) => {
-    return extension.trim().replace(MATCHES_LEADING_DOT, '');
-  }).join('|');
+  const joinedExtensions = options.rawFileExtensions
+    .map(extension => {
+      return extension.trim().replace(MATCHES_LEADING_DOT, '');
+    })
+    .join('|');
 
   return new RegExp(`\\.(?:${joinedExtensions})\$`);
 }
@@ -97,9 +141,44 @@ function createWebpackConfig(options) {
   validateOptions(options);
 
   const entry = createEntry(options);
-  const outFile = Array.isArray(entry) ? 'bundle.js' : '[name]-bundle.js';
+  const rootDir = getRootDir(options);
+  const includeDirs = getIncludeDirs(options);
+  const outFile = typeof options.input === 'string' ? 'bundle.js' : '[name]-bundle.js';
   const outDir = path.resolve(CWD, options.outDir);
-  const rawTestRegex = createFileExtensionRegex(options);
+
+  const rules = [
+    options.rawFileExtensions.length ? {
+      test: createFileExtensionRegex(options),
+      use: 'raw-loader',
+    } : null,
+    {
+      test: /\.[tj]sx?$/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: [
+              [
+                'env',
+                {
+                  modules: false,
+                },
+              ],
+            ],
+          },
+        },
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            configFile: path.resolve(CWD, options.tsconfig),
+          },
+        },
+      ],
+      include: includeDirs,
+    },
+  ].filter(rule => Boolean(rule));
 
   return {
     performance: {
@@ -115,44 +194,12 @@ function createWebpackConfig(options) {
       path: outDir,
     },
     module: {
-      rules: [
-        {
-          test: rawTestRegex,
-          use: 'raw-loader',
-        },
-        {
-          test: /\.[tj]sx?$/,
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                babelrc: false,
-                presets: [
-                  [
-                    'env',
-                    {
-                      modules: false,
-                    },
-                  ],
-                ],
-              },
-            },
-            {
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
-                configFile: path.resolve(CWD, options.tsconfig)
-              },
-            },
-          ],
-          include: path.resolve(__dirname, 'static/src/ts'),
-        },
-      ],
+      rules,
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
-        '^': path.resolve(__dirname, 'static/src/ts'),
+        '^': rootDir,
       },
     },
     plugins: [
