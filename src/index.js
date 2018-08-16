@@ -16,6 +16,10 @@ module.exports = {
     'raf/polyfill',
     path.resolve(__dirname, 'static/src/ts/index.tsx'),
   ],
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'static/build/js/'),
+  },
   module: {
     rules: [
       {
@@ -55,10 +59,6 @@ module.exports = {
     alias: {
       '^': path.resolve(__dirname, 'static/src/ts'),
     },
-  },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'static/build/js/'),
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
