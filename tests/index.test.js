@@ -37,6 +37,7 @@ describe('createWebpackConfig', () => {
     const invalidTsconfig = /Invalid\s"tsconfig"/;
     const invalidEnv = /Invalid\s"env"/;
     const invalidRawFileExtensions = /Invalid\s"rawFileExtensions"/;
+    const invalidRootDir = /Invalid\s"rootDir"/;
 
     const optionsToErrors = [
       {
@@ -214,6 +215,42 @@ describe('createWebpackConfig', () => {
           rawFileExtensions: '',
         },
         error: invalidRawFileExtensions,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          rootDir: null,
+        },
+        error: invalidRootDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          rootDir: '',
+        },
+        error: invalidRootDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          rootDir: {},
+        },
+        error: invalidRootDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          rootDir: [],
+        },
+        error: invalidRootDir,
       },
     ];
 
