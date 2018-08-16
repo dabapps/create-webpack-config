@@ -25,6 +25,10 @@ function validateOptions(options) {
     );
   }
 
+  if (typeof options.input === 'object' && !Object.keys(options.input).length) {
+    throw new Error('No keys in "input" option');
+  }
+
   if (!('outDir' in options)) {
     throw new Error('No "outDir" in config options');
   }
@@ -50,8 +54,26 @@ function validateOptions(options) {
   }
 }
 
+function createEntry(options) {
+  if (typeof options.input === 'string') {
+    return POLYFILLS.concat(path.resolve(CWD, options.input));
+  }
+
+  const entry = {};
+
+  Object.keys(options.input).forEach((key) => {
+    entry[key] = POLYFILLS.concat(path.resolve(CWD, options.input[key]));
+  });
+
+  return entry;
+}
+
 function createWebpackConfig(options) {
   validateOptions(options);
+
+  const entry = createEntry(options);
+  const outFile = Array.isArray(entry) ? 'bundle.js' : '[name]-bundle.js';
+  const outDir = path.resolve(CWD, options.outDir);
 
   return {
     performance: {
@@ -61,14 +83,10 @@ function createWebpackConfig(options) {
       timings: true,
     },
     devtool: 'source-map',
-    entry: [
-      'babel-polyfill',
-      'raf/polyfill',
-      path.resolve(__dirname, 'static/src/ts/index.tsx'),
-    ],
+    entry,
     output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'static/build/js/'),
+      filename: outFile,
+      path: outDir,
     },
     module: {
       rules: [
