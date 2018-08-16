@@ -29,7 +29,10 @@ describe('createWebpackConfig', () => {
   it('should error if invalid options provided', () => {
     const invalidOptions = /Invalid\sconfig\soptions/;
     const noInput = /No\s"input"/;
+    const noKeys = /No\skeys\sin\s"input"/;
     const invalidInput = /Invalid\s"input"/;
+    const noOutDir = /No\s"outDir"/;
+    const invalidOutDir = /Invalid\s"outDir"/;
 
     const optionsToErrors = [
       {
@@ -61,6 +64,59 @@ describe('createWebpackConfig', () => {
           input: [],
         },
         error: invalidInput,
+      },
+      {
+        options: {
+          input: 0,
+        },
+        error: invalidInput,
+      },
+      {
+        options: {
+          input: {},
+        },
+        error: noKeys,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+        },
+        error: noOutDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: null,
+        },
+        error: invalidOutDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: {},
+        },
+        error: invalidOutDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: [],
+        },
+        error: invalidOutDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: '',
+        },
+        error: invalidOutDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 0,
+        },
+        error: invalidOutDir,
       },
     ];
 
