@@ -81,7 +81,7 @@ last 10 ExplorerMobile versions
 Explorer >= 9
 ```
 
-### TypeScript config
+### TypeScript base config
 
 Create a `tsconfig.json` in the root of the project and add the following contents, adjusting `include`, `paths`, and `typeRoots` as needed.
 
