@@ -19,10 +19,49 @@ It features:
 ## Installation
 
 ```shell
-npm i @dabapps/webpack-config -S
+npm i @dabapps/create-webpack-config -S
 ```
 
 ## Setup
+
+### Creating your config
+
+Create a file called `webpack.config.js` and add the following contents, adjusting options as desired.
+
+This will bundle your `index.ts` file and all dependencies into a `bundle.js` in the `static/build/js` directory.
+
+```js
+const createWebpackConfig = require('@dabapps/create-webpack-config');
+
+module.exports = createWebpackConfig({
+  input: './static/src/ts/index.ts',
+  outDir: './static/build/js',
+  tsconfig: './tsconfig.dist.json',
+  env: {
+    NODE_ENV: 'production'
+  }
+});
+```
+
+If you require multiple bundles you can supply an object as the `input`. Files will be created in the `outDir` with names corresponding to the keys in your `input` object.
+
+The following config will create `static/build/js/frontend-bundle.js` and `static/build/js/admin-bundle.js`.
+
+```js
+const createWebpackConfig = require('@dabapps/create-webpack-config');
+
+module.exports = createWebpackConfig({
+  input: {
+    frontend: './static/src/ts/index.ts',
+    admin: './static/src/ts/admin.ts'
+  },
+  outDir: './static/build/js',
+  tsconfig: './tsconfig.dist.json',
+  env: {
+    NODE_ENV: 'production'
+  }
+});
+```
 
 ### Browser support
 
@@ -102,11 +141,11 @@ This is necessary to allow us to build our source without also type checking our
 
 ### Build scripts
 
-Add the following scripts to your `package.json` updating paths as necessary.
+Add the following scripts to your `package.json`.
 
 ```json
 {
-  "build-js": "webpack static/src/ts/index.tsx --config @dabapps/webpack-config --mode production -o static/build/js/bundle.js",
-  "watch-js": "webpack static/src/ts/index.tsx --config @dabapps/webpack-config --mode development -o static/build/js/bundle.js --watch"
+  "build-js": "webpack --config webpack.config.js --mode production",
+  "watch-js": "webpack --config webpack.config.js --mode development --watch"
 }
 ```
