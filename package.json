@@ -2,7 +2,7 @@
   "name": "@dabapps/webpack-config",
   "version": "0.0.0",
   "description": "DabApps' common webpack config",
-  "main": "webpack.config.js",
+  "main": "config/webpack.config.js",
   "scripts": {
     "tests": "echo \"No tests!\" && exit 1",
     "lint": "eslint .",
