@@ -73,6 +73,26 @@ module.exports = createWebpackConfig({
 });
 ```
 
+If you would like to be able to import "raw" files as strings, you can provide a `rawFileExtensions` option, with a list of file extension that should be imported as strings e.g.
+
+```js
+{
+  rawFileExtensions: ['html', 'xml', 'txt', 'csv']
+}
+```
+
+If you require multiple bundles, but your source files do not both have the same parent directory, you will have to manually supply a `rootDir` option in order to use the root dir alias (`^`) e.g.
+
+```js
+{
+  input: {
+    frontend: './src/frontend/index.ts',
+    admin: './src/admin/index.ts'
+  },
+  rootDir: './src'
+}
+```
+
 ### Browser support
 
 Create a `.browserslistrc` file in the root of your project and add the following contents, adjusting as desired.
