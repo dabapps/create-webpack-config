@@ -98,7 +98,7 @@ function getRootDir(options) {
   Object.keys(options.input).forEach(key => {
     const dir = path.dirname(path.resolve(CWD, options.input[key]));
 
-    if (dirs.indexOf(dir) < 0) {
+    if (dirs.length && dirs.indexOf(dir) < 0) {
       throw new Error(
         'More than one possible root directory - please specify a "rootDir" option'
       );
