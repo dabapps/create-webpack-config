@@ -30,6 +30,7 @@ Create a file called `webpack.config.js` and add the following contents, adjusti
 
 This will bundle your `index.ts` file and all dependencies into a `bundle.js` in the `static/build/js` directory.
 
+`webpack.config.js`
 ```js
 const createWebpackConfig = require('@dabapps/create-webpack-config');
 
@@ -47,6 +48,7 @@ If you require multiple bundles you can supply an object as the `input`. Files w
 
 The following config will create `static/build/js/frontend-bundle.js` and `static/build/js/admin-bundle.js`.
 
+`webpack.config.js`
 ```js
 const createWebpackConfig = require('@dabapps/create-webpack-config');
 
@@ -69,6 +71,7 @@ Create a `.browserslistrc` file in the root of your project and add the followin
 
 This file is used by webpack, and other tools such as autoprefixer to make our code compatible with the browsers we want to support.
 
+`.browserslistrc`
 ```
 last 10 Chrome versions
 last 10 Firefox versions
@@ -91,6 +94,7 @@ This will contain all of our base TypeScript config.
 
 You may enable type checking on Javascript files by setting `checkJs` to `true`. This can be useful if migrating a Javascript project to TypeScript.
 
+`tsconfig.json`
 ```json
 {
   "compilerOptions": {
@@ -129,6 +133,7 @@ Create a `tsconfig.dist.json` file in the root of your project and add the follo
 
 This is necessary to allow us to build our source without also type checking our tests or other Javascript and TypeScript files in the project.
 
+`tsconfig.dist.json`
 ```json
 {
   "extends": "./tsconfig.json",
@@ -143,6 +148,7 @@ This is necessary to allow us to build our source without also type checking our
 
 Add the following scripts to your `package.json`.
 
+`package.json`
 ```json
 {
   "scripts": {
