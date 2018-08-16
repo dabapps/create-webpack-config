@@ -96,6 +96,27 @@ describe('createWebpackConfig', () => {
     expect(unsureAboutAliases).toThrow(/rootDir/);
   });
 
+  it('should create rules without raw files if no extensions provided', () => {
+    const config1 = createWebpackConfig({
+      input: 'src/index.ts',
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+    });
+
+    const config2 = createWebpackConfig({
+      input: 'src/index.ts',
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+      rawFileExtensions: [],
+    });
+
+    expect(config1.module.rules.length).toBe(1);
+    expect(config1.module.rules[0].use[0].loader).toBe('babel-loader');
+
+    expect(config2.module.rules.length).toBe(1);
+    expect(config2.module.rules[0].use[0].loader).toBe('babel-loader');
+  });
+
   it('should create a regex for raw files', () => {
     const config = createWebpackConfig({
       input: 'src/index.ts',
