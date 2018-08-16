@@ -48,6 +48,7 @@ function validateOptions(options) {
 
   if (
     (typeof options.env !== 'object' && typeof options.env !== 'undefined') ||
+    (typeof options.env === 'object' && !options.env) ||
     Array.isArray(options.env)
   ) {
     throw new Error('Invalid "env" option - must be a keyed object');
