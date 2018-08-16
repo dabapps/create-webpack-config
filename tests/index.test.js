@@ -90,7 +90,7 @@ describe('createWebpackConfig', () => {
     );
   });
 
-  it('should error if multiple entries are in different directories', () => {
+  it('should error if multiple entries are in different directories and no rootDir provided', () => {
     const unsureAboutAliases = () =>
       createWebpackConfig({
         input: {
@@ -102,6 +102,26 @@ describe('createWebpackConfig', () => {
       });
 
     expect(unsureAboutAliases).toThrow(/rootDir/);
+  });
+
+  it('should have multiple includes if entries are in different directories', () => {
+    const config = createWebpackConfig({
+      input: {
+        frontend: 'src/frontend/index.ts',
+        admin: 'src/admin/index.ts',
+      },
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+      rootDir: 'src',
+    });
+
+    expect(config.resolve.alias).toEqual({
+      '^': path.resolve(CWD, 'src'),
+    });
+
+    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
+      [path.resolve(CWD, 'src/frontend'), path.resolve(CWD, 'src/admin')]
+    );
   });
 
   it('should use rootDir if provided', () => {
