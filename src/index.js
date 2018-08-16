@@ -129,6 +129,7 @@ function createWebpackConfig(options) {
               loader: 'ts-loader',
               options: {
                 transpileOnly: true,
+                configFile: path.resolve(CWD, options.tsconfig)
               },
             },
           ],
