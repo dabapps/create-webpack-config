@@ -26,6 +26,49 @@ describe('createWebpackConfig', () => {
     ).toBe('object');
   });
 
+  it('should error if invalid options provided', () => {
+    const invalidOptions = /Invalid\sconfig\soptions/;
+    const noInput = /No\s"input"/;
+    const invalidInput = /Invalid\s"input"/;
+
+    const optionsToErrors = [
+      {
+        options: null,
+        error: invalidOptions,
+      },
+      {
+        options: [],
+        error: invalidOptions,
+      },
+      {
+        options: {},
+        error: noInput,
+      },
+      {
+        options: {
+          input: '',
+        },
+        error: invalidInput,
+      },
+      {
+        options: {
+          input: null,
+        },
+        error: invalidInput,
+      },
+      {
+        options: {
+          input: [],
+        },
+        error: invalidInput,
+      },
+    ];
+
+    optionsToErrors.forEach(({ options, error }) => {
+      expect(() => createWebpackConfig(options)).toThrow(error);
+    });
+  });
+
   it('should bundle a single entry', () => {
     const config = createWebpackConfig({
       input: 'src/index.ts',
