@@ -79,13 +79,14 @@ describe('createWebpackConfig', () => {
   });
 
   it('should error if multiple entries are in different directories', () => {
-    const unsureAboutAliases = () => createWebpackConfig({
-      input: {
-        frontend: 'src/index.ts',
-        admin: 'admin/index.js',
-      },
-      outDir: 'dist',
-    });
+    const unsureAboutAliases = () =>
+      createWebpackConfig({
+        input: {
+          frontend: 'src/index.ts',
+          admin: 'admin/index.js',
+        },
+        outDir: 'dist',
+      });
 
     expect(unsureAboutAliases).toThrow(/alias/);
   });
