@@ -129,6 +129,16 @@ describe('createWebpackConfig', () => {
     });
   });
 
+  it('should work without environment variables', () => {
+    createWebpackConfig({
+      input: 'src/index.ts',
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+    });
+
+    expect(EnvironmentPlugin).toHaveBeenCalledWith({});
+  });
+
   it('should set default environment variables', () => {
     createWebpackConfig({
       input: 'src/index.ts',
