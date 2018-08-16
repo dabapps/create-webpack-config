@@ -51,6 +51,7 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-dabapps": "github:dabapps/eslint-config-dabapps",
+    "jest": "^23.5.0",
     "prettier": "^1.14.2"
   },
   "peerDependencies": {
