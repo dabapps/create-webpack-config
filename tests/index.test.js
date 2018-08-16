@@ -53,7 +53,7 @@ describe('createWebpackConfig', () => {
     const config = createWebpackConfig({
       input: {
         frontend: 'src/index.ts',
-        admin: 'src/admin.js',
+        admin: 'src/admin.ts',
       },
       outDir: 'dist',
       tsconfig: 'tsconfig.json',
@@ -93,7 +93,7 @@ describe('createWebpackConfig', () => {
         tsconfig: 'tsconfig.json',
       });
 
-    expect(unsureAboutAliases).toThrow(/alias/);
+    expect(unsureAboutAliases).toThrow(/rootDir/);
   });
 
   it('should create a regex for raw files', () => {
