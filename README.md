@@ -1,6 +1,6 @@
-# Webpack Config
+# Create Webpack Config
 
-**DabApps' common webpack config**
+**A utility for creating webpack configs with common settings**
 
 ## About
 

@@ -1,7 +1,7 @@
 {
-  "name": "@dabapps/webpack-config",
+  "name": "@dabapps/create-webpack-config",
   "version": "0.0.0",
-  "description": "DabApps' common webpack config",
+  "description": "A utility for creating webpack configs with common settings",
   "main": "src/index.js",
   "scripts": {
     "prettier": "prettier --write '@(src|tests)/**/*.@(ts|tsx|js|jsx)'",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dabapps/webpack-config.git"
+    "url": "git+https://github.com/dabapps/create-webpack-config.git"
   },
   "keywords": [
     "webpack",
@@ -30,9 +30,9 @@
   "author": "DabApps",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dabapps/webpack-config/issues"
+    "url": "https://github.com/dabapps/create-webpack-config/issues"
   },
-  "homepage": "https://github.com/dabapps/webpack-config#readme",
+  "homepage": "https://github.com/dabapps/create-webpack-config#readme",
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
