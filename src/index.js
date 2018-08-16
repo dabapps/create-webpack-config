@@ -5,7 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CWD = process.cwd();
 const POLYFILLS = ['babel-polyfill', 'raf/polyfill'];
-const MATCHES_LEADING_DOT = /^./;
+const MATCHES_LEADING_DOT = /^\./;
 
 function validateOptions(options) {
   if (!options || typeof options !== 'object' || Array.isArray(options)) {
