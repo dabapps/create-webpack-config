@@ -47,6 +47,10 @@ describe('createWebpackConfig', () => {
     expect(config.resolve.alias).toEqual({
       '^': path.resolve(CWD, 'src/'),
     });
+
+    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
+      path.resolve(CWD, 'src/')
+    );
   });
 
   it('should bundle multiple entries', () => {
