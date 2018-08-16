@@ -17,13 +17,20 @@ describe('createWebpackConfig', () => {
   });
 
   it('should return a webpack config object', () => {
-    expect(typeof createWebpackConfig()).toBe('object');
+    expect(
+      typeof createWebpackConfig({
+        input: 'src/index.ts',
+        outDir: 'dist',
+        tsconfig: 'tsconfig.json',
+      })
+    ).toBe('object');
   });
 
   it('should bundle a single entry', () => {
     const config = createWebpackConfig({
       input: 'src/index.ts',
       outDir: 'dist',
+      tsconfig: 'tsconfig.json',
     });
 
     expect(config.entry).toEqual([
@@ -49,6 +56,7 @@ describe('createWebpackConfig', () => {
         admin: 'src/admin.js',
       },
       outDir: 'dist',
+      tsconfig: 'tsconfig.json',
     });
 
     expect(config.entry).toEqual({
@@ -82,6 +90,7 @@ describe('createWebpackConfig', () => {
           admin: 'admin/index.js',
         },
         outDir: 'dist',
+        tsconfig: 'tsconfig.json',
       });
 
     expect(unsureAboutAliases).toThrow(/alias/);
@@ -89,6 +98,9 @@ describe('createWebpackConfig', () => {
 
   it('should create a regex for raw files', () => {
     const config = createWebpackConfig({
+      input: 'src/index.ts',
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
       rawFileExtensions: ['html', 'txt', 'xml', 'csv'],
     });
 
@@ -116,6 +128,9 @@ describe('createWebpackConfig', () => {
 
   it('should set default environment variables', () => {
     createWebpackConfig({
+      input: 'src/index.ts',
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
       env: {
         NODE_ENV: 'production',
       },
