@@ -33,6 +33,8 @@ describe('createWebpackConfig', () => {
     const invalidInput = /Invalid\s"input"/;
     const noOutDir = /No\s"outDir"/;
     const invalidOutDir = /Invalid\s"outDir"/;
+    const noTsconfig = /No\s"tsconfig"/;
+    const invalidTsconfig = /Invalid\s"tsconfig"/;
 
     const optionsToErrors = [
       {
@@ -117,6 +119,45 @@ describe('createWebpackConfig', () => {
           outDir: 0,
         },
         error: invalidOutDir,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+        },
+        error: noTsconfig,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: null,
+        },
+        error: invalidTsconfig,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: [],
+        },
+        error: invalidTsconfig,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: {},
+        },
+        error: invalidTsconfig,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: '',
+        },
+        error: invalidTsconfig,
       },
     ];
 

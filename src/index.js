@@ -42,6 +42,10 @@ function validateOptions(options) {
     throw new Error('No "tsconfig" in config options');
   }
 
+  if (!options.tsconfig || typeof options.tsconfig !== 'string') {
+    throw new Error('Invalid "tsconfig" in config options - must be a string');
+  }
+
   if (
     (typeof options.env !== 'object' && typeof options.env !== 'undefined') ||
     Array.isArray(options.env)
