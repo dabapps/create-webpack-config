@@ -4,7 +4,7 @@
 
 ## About
 
-This webpack config is designed to work as a drop-in for any Javascript or TypeScript project.
+This utility will create a webpack config that should function as a drop-in for any Javascript or TypeScript project.
 
 It features:
 
