@@ -18,8 +18,16 @@ It features:
 
 ## Installation
 
+Install `@dabapps/create-webpack-config`:
+
 ```shell
 npm i @dabapps/create-webpack-config -S
+```
+
+Install peer dependencies (TypeScript must be at least version 2):
+
+```shell
+npm i typescript webpack-cli@3 -S
 ```
 
 ## Setup
