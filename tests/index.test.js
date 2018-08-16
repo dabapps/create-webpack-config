@@ -113,6 +113,8 @@ describe('createWebpackConfig', () => {
 
   it('should set the tsconfig path', () => {
     const config = createWebpackConfig({
+      input: 'src/index.ts',
+      outDir: 'dist',
       tsconfig: 'tsconfig.json',
     });
 
