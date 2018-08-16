@@ -62,7 +62,10 @@ function validateOptions(options) {
     throw new Error('Invalid "rawFileExtensions" option - must be an array');
   }
 
-  if (typeof options.rootDir !== 'string' && typeof options.rootDir !== 'undefined') {
+  if (
+    typeof options.rootDir !== 'string' &&
+    typeof options.rootDir !== 'undefined'
+  ) {
     throw new Error('Invalid "rootDir" options - must be a string');
   }
 
@@ -143,14 +146,17 @@ function createWebpackConfig(options) {
   const entry = createEntry(options);
   const rootDir = getRootDir(options);
   const includeDirs = getIncludeDirs(options);
-  const outFile = typeof options.input === 'string' ? 'bundle.js' : '[name]-bundle.js';
+  const outFile =
+    typeof options.input === 'string' ? 'bundle.js' : '[name]-bundle.js';
   const outDir = path.resolve(CWD, options.outDir);
 
   const rules = [
-    options.rawFileExtensions.length ? {
-      test: createFileExtensionRegex(options),
-      use: 'raw-loader',
-    } : null,
+    options.rawFileExtensions.length
+      ? {
+          test: createFileExtensionRegex(options),
+          use: 'raw-loader',
+        }
+      : null,
     {
       test: /\.[tj]sx?$/,
       use: [
