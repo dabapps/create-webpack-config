@@ -118,7 +118,8 @@ describe('createWebpackConfig', () => {
       tsconfig: 'tsconfig.json',
     });
 
-    const tsLoaderRule = config.module.rules[1].use[1];
+    const tsLoaderRule =
+      config.module.rules[config.module.rules.length - 1].use[1];
 
     expect(typeof tsLoaderRule).toBe('object');
     expect(tsLoaderRule.loader).toBe('ts-loader');
