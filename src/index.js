@@ -54,7 +54,12 @@ function validateOptions(options) {
     throw new Error('Invalid "env" option - must be a keyed object');
   }
 
-  if (!Array.isArray(options.rawFileExtensions)) {
+  if (
+    !(
+      Array.isArray(options.rawFileExtensions) ||
+      typeof options.rawFileExtensions === 'undefined'
+    )
+  ) {
     throw new Error('Invalid "rawFileExtensions" option - must be an array');
   }
 }
