@@ -120,10 +120,12 @@ function getIncludeDirs(options) {
   Object.keys(options.input).forEach(key => {
     const dir = path.dirname(path.resolve(CWD, options.input[key]));
 
-    dirs.push(dir);
+    if (dirs.indexOf(dir) < 0) {
+      dirs.push(dir);
+    }
   });
 
-  return dirs;
+  return dirs.length > 1 ? dirs : dirs[0];
 }
 
 function createFileExtensionRegex(options) {
