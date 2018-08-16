@@ -61,6 +61,14 @@ function validateOptions(options) {
   ) {
     throw new Error('Invalid "rawFileExtensions" option - must be an array');
   }
+
+  if (typeof options.rootDir !== 'string' && typeof options.rootDir !== 'undefined') {
+    throw new Error('Invalid "rootDir" options - must be a string');
+  }
+
+  if (typeof options.rootDir === 'string' && !options.rootDir) {
+    throw new Error('Invalid "rootDir" option - cannot be an empty string');
+  }
 }
 
 function createEntry(options) {
