@@ -147,7 +147,7 @@ function createWebpackConfig(options) {
   const outDir = path.resolve(CWD, options.outDir);
 
   const rules = [
-    options.rawFileExtensions.length
+    (options.rawFileExtensions || []).length
       ? {
           test: createFileExtensionRegex(options),
           use: 'raw-loader',
