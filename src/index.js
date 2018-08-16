@@ -23,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(?:html|txt|xml)$/,
+        test: /\.(?:html|txt|xml|csv)$/,
         use: 'raw-loader',
       },
       {
