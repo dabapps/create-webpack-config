@@ -145,7 +145,9 @@ Add the following scripts to your `package.json`.
 
 ```json
 {
-  "build-js": "webpack --config webpack.config.js --mode production",
-  "watch-js": "webpack --config webpack.config.js --mode development --watch"
+  "scripts": {
+    "build-js": "webpack --config webpack.config.js --mode production",
+    "watch-js": "webpack --config webpack.config.js --mode development --watch"
+  }
 }
 ```
