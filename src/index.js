@@ -42,10 +42,6 @@ function validateOptions(options) {
     throw new Error('No "tsconfig" in config options');
   }
 
-  if (!('env' in options)) {
-    throw new Error('No "env" in config options');
-  }
-
   if (
     (typeof options.env !== 'object' && typeof options.env !== 'undefined') ||
     Array.isArray(options.env)
