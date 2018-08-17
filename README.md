@@ -133,7 +133,7 @@ You may enable type checking on Javascript files by setting `checkJs` to `true`.
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "allowJs": true,
+    "allowJs": false,
     "checkJs": false,
     "jsx": "react",
     "target": "es6",
