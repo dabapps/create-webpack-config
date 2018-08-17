@@ -118,9 +118,11 @@ Create a `tsconfig.json` in the root of the project and add the following conten
 
 This will contain all of our base TypeScript config.
 
-`allowSyntheticDefaultImports` and `esModuleInterop` allow us to import modules that don't have default exports as if they did, in TypeScript, so that we can be consistent across Javascript and TypeScript projects. E.g. `import React from 'react';` as opposed to `import * as React from 'react';`
+By default `allowJs` is set to `false`. If your project contains Javascript you should set this to `true`.
 
 You may enable type checking on Javascript files by setting `checkJs` to `true`. This can be useful if migrating a Javascript project to TypeScript.
+
+`allowSyntheticDefaultImports` and `esModuleInterop` allow us to import modules that don't have default exports as if they did, in TypeScript, so that we can be consistent across Javascript and TypeScript projects. E.g. `import React from 'react';` as opposed to `import * as React from 'react';`
 
 `tsconfig.json`
 ```json
