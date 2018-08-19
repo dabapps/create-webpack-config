@@ -267,8 +267,8 @@ describe('createWebpackConfig', () => {
     });
 
     expect(config.entry).toEqual([
-      'babel-polyfill',
-      'raf/polyfill',
+      require.resolve('babel-polyfill'),
+      require.resolve('raf/polyfill'),
       path.resolve(CWD, 'src/index.ts'),
     ]);
 
@@ -298,13 +298,13 @@ describe('createWebpackConfig', () => {
 
     expect(config.entry).toEqual({
       frontend: [
-        'babel-polyfill',
-        'raf/polyfill',
+        require.resolve('babel-polyfill'),
+        require.resolve('raf/polyfill'),
         path.resolve(CWD, 'src/index.ts'),
       ],
       admin: [
-        'babel-polyfill',
-        'raf/polyfill',
+        require.resolve('babel-polyfill'),
+        require.resolve('raf/polyfill'),
         path.resolve(CWD, 'src/admin.ts'),
       ],
     });
@@ -388,10 +388,14 @@ describe('createWebpackConfig', () => {
     });
 
     expect(config1.module.rules.length).toBe(1);
-    expect(config1.module.rules[0].use[0].loader).toBe('babel-loader');
+    expect(config1.module.rules[0].use[0].loader).toBe(
+      require.resolve('babel-loader')
+    );
 
     expect(config2.module.rules.length).toBe(1);
-    expect(config2.module.rules[0].use[0].loader).toBe('babel-loader');
+    expect(config2.module.rules[0].use[0].loader).toBe(
+      require.resolve('babel-loader')
+    );
   });
 
   it('should create a regex for raw files', () => {
@@ -405,7 +409,7 @@ describe('createWebpackConfig', () => {
     const rawLoaderRule = config.module.rules[0];
 
     expect(typeof rawLoaderRule).toBe('object');
-    expect(rawLoaderRule.use).toBe('raw-loader');
+    expect(rawLoaderRule.use).toBe(require.resolve('raw-loader'));
     expect(rawLoaderRule.test).toEqual(/\.(?:html|txt|xml|csv)$/);
   });
 
@@ -420,7 +424,7 @@ describe('createWebpackConfig', () => {
       config.module.rules[config.module.rules.length - 1].use[1];
 
     expect(typeof tsLoaderRule).toBe('object');
-    expect(tsLoaderRule.loader).toBe('ts-loader');
+    expect(tsLoaderRule.loader).toBe(require.resolve('ts-loader'));
     expect(tsLoaderRule.options).toEqual({
       transpileOnly: true,
       configFile: path.resolve(CWD, 'tsconfig.json'),
