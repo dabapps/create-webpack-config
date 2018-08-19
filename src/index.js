@@ -6,7 +6,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CWD = process.cwd();
 const POLYFILLS = [
   require.resolve('babel-polyfill'),
-  require.resolve('raf/polyfill')
+  require.resolve('raf/polyfill'),
 ];
 const MATCHES_LEADING_DOT = /^\./;
 
