@@ -182,8 +182,8 @@ Add the following scripts to your `package.json`.
 ```json
 {
   "scripts": {
-    "build-js": "webpack --config webpack.config.js --mode production",
-    "watch-js": "webpack --config webpack.config.js --mode development --watch"
+    "build-js": "webpack --mode production",
+    "watch-js": "webpack --mode development --watch"
   }
 }
 ```
