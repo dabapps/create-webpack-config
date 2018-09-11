@@ -214,6 +214,16 @@ function createWebpackConfig(options) {
         '^': rootDir,
       },
     },
+    devServer: {
+      contentBase: entry,
+      port: 3000,
+      inline: options.livePageReload,
+      proxy: {
+        '*': {
+          target: 'http://[::1]',
+        }
+      }
+    },
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
       new CircularDependencyPlugin({
