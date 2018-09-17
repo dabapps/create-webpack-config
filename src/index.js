@@ -8,7 +8,12 @@ const POLYFILLS = [
   require.resolve('babel-polyfill'),
   require.resolve('raf/polyfill'),
 ];
+
+const HOST = '0.0.0.0';
+const PORT = 3000;
+
 const MATCHES_LEADING_DOT = /^\./;
+const MATCHES_LEADING_DOT_SLASHES = /^[\.\/]+/;
 
 function validateOptions(options) {
   if (!options || typeof options !== 'object' || Array.isArray(options)) {
@@ -204,6 +209,7 @@ function createWebpackConfig(options) {
     output: {
       filename: outFile,
       path: outDir,
+      publicPath: options.outDir.replace(MATCHES_LEADING_DOT_SLASHES, ''),
     },
     module: {
       rules,
@@ -215,14 +221,9 @@ function createWebpackConfig(options) {
       },
     },
     devServer: {
-      contentBase: entry,
-      port: 3000,
-      inline: options.livePageReload,
-      proxy: {
-        '*': {
-          target: 'http://[::1]',
-        }
-      }
+      contentBase: CWD,
+      port: PORT,
+      host: HOST,
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
