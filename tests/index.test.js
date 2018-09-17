@@ -275,6 +275,7 @@ describe('createWebpackConfig', () => {
     expect(config.output).toEqual({
       filename: 'bundle.js',
       path: path.resolve(CWD, 'dist'),
+      publicPath: 'dist',
     });
 
     expect(config.resolve.alias).toEqual({
@@ -312,6 +313,7 @@ describe('createWebpackConfig', () => {
     expect(config.output).toEqual({
       filename: '[name]-bundle.js',
       path: path.resolve(CWD, 'dist'),
+      publicPath: 'dist',
     });
 
     expect(config.resolve.alias).toEqual({
