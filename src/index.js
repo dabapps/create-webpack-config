@@ -224,6 +224,7 @@ function createWebpackConfig(options) {
       contentBase: CWD,
       port: PORT,
       host: HOST,
+      historyApiFallback: true,
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
