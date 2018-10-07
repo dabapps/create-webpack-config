@@ -394,6 +394,57 @@ describe('createWebpackConfig', () => {
     );
   });
 
+  it('should add include options to includes (single include)', () => {
+    const config = createWebpackConfig({
+      input: {
+        frontend: 'src/frontend/index.ts',
+        admin: 'src/admin/index.ts',
+      },
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+      rootDir: 'src',
+      include: 'examples',
+    });
+
+    expect(config.resolve.alias).toEqual({
+      '^': path.resolve(CWD, 'src'),
+    });
+
+    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
+      [
+        path.resolve(CWD, 'examples'),
+        path.resolve(CWD, 'src/frontend'),
+        path.resolve(CWD, 'src/admin'),
+      ]
+    );
+  });
+
+  it('should add include options to includes (array of includes)', () => {
+    const config = createWebpackConfig({
+      input: {
+        frontend: 'src/frontend/index.ts',
+        admin: 'src/admin/index.ts',
+      },
+      outDir: 'dist',
+      tsconfig: 'tsconfig.json',
+      rootDir: 'src',
+      include: ['examples', 'docs'],
+    });
+
+    expect(config.resolve.alias).toEqual({
+      '^': path.resolve(CWD, 'src'),
+    });
+
+    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
+      [
+        path.resolve(CWD, 'examples'),
+        path.resolve(CWD, 'docs'),
+        path.resolve(CWD, 'src/frontend'),
+        path.resolve(CWD, 'src/admin'),
+      ]
+    );
+  });
+
   it('should use rootDir if provided', () => {
     const config = createWebpackConfig({
       input: {
