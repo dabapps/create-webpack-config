@@ -88,7 +88,7 @@ function validateOptions(options) {
     throw new Error('Invalid "include" option - cannot be an empty string');
   }
 
-  if (Array.isArray(options.include) && !options.length) {
+  if (Array.isArray(options.include) && !options.include.length) {
     throw new Error('Invalid "include" option - cannot be an empty array');
   }
 }
