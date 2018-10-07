@@ -38,6 +38,7 @@ describe('createWebpackConfig', () => {
     const invalidEnv = /Invalid\s"env"/;
     const invalidRawFileExtensions = /Invalid\s"rawFileExtensions"/;
     const invalidRootDir = /Invalid\s"rootDir"/;
+    const invalidInclude = /Invalid\s"include"/;
 
     const optionsToErrors = [
       {
@@ -252,6 +253,42 @@ describe('createWebpackConfig', () => {
         },
         error: invalidRootDir,
       },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          include: null,
+        },
+        error: invalidInclude,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          include: {},
+        },
+        error: invalidInclude,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          include: '',
+        },
+        error: invalidInclude,
+      },
+      {
+        options: {
+          input: 'src/index.ts',
+          outDir: 'dist',
+          tsconfig: 'tsconfig.json',
+          include: [],
+        },
+        error: invalidInclude,
+      },
     ];
 
     optionsToErrors.forEach(({ options, error }) => {
@@ -282,7 +319,7 @@ describe('createWebpackConfig', () => {
     });
 
     expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      path.resolve(CWD, 'src/')
+      [path.resolve(CWD, 'src/')]
     );
   });
 
@@ -319,7 +356,7 @@ describe('createWebpackConfig', () => {
     });
 
     expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      path.resolve(CWD, 'src/')
+      [path.resolve(CWD, 'src/')]
     );
   });
 
