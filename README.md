@@ -93,6 +93,17 @@ If you require multiple bundles, but your source files do not both have the same
 }
 ```
 
+In order to transpile files outside of the main file's parent directory or the specified `rootDir`, you will need to add an `include` option with the additional path(s) to transpile, though this is not usually necessary.
+
+The `include` option can be either a string or array of strings.
+
+```js
+{
+  input: 'src/index.ts',
+  include: ['./examples', './docs']
+}
+```
+
 ### Browser support
 
 Create a `.browserslistrc` file in the root of your project and add the following contents, adjusting as desired.
