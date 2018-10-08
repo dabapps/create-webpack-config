@@ -73,6 +73,21 @@ function validateOptions(options) {
   if (typeof options.rootDir === 'string' && !options.rootDir) {
     throw new Error('Invalid "rootDir" option - cannot be an empty string');
   }
+
+  if (
+    typeof options.include !== 'undefined' &&
+    !(typeof options.include === 'string' || Array.isArray(options.include))
+  ) {
+    throw new Error('Invalid "include" option - must be a string or array');
+  }
+
+  if (typeof options.include === 'string' && !options.include) {
+    throw new Error('Invalid "include" option - cannot be an empty string');
+  }
+
+  if (Array.isArray(options.include) && !options.include.length) {
+    throw new Error('Invalid "include" option - cannot be an empty array');
+  }
 }
 
 function createEntry(options) {
@@ -116,8 +131,12 @@ function getRootDir(options) {
 }
 
 function getIncludeDirs(options) {
+  const includes = []
+    .concat(options.include || [])
+    .map(include => path.resolve(CWD, include));
+
   if (typeof options.input === 'string') {
-    return path.dirname(path.resolve(CWD, options.input));
+    return includes.concat(path.dirname(path.resolve(CWD, options.input)));
   }
 
   const dirs = [];
@@ -130,7 +149,7 @@ function getIncludeDirs(options) {
     }
   });
 
-  return dirs.length > 1 ? dirs : dirs[0];
+  return includes.concat(dirs);
 }
 
 function createFileExtensionRegex(options) {
