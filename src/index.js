@@ -9,8 +9,7 @@ const POLYFILLS = [
   require.resolve('raf/polyfill'),
 ];
 
-const HOST = '0.0.0.0';
-const PORT = 3000;
+const { HOST = '0.0.0.0', PORT = 3000 } = process.env;
 
 const MATCHES_LEADING_DOT = /^\./;
 const MATCHES_LEADING_DOT_SLASHES = /^[\.\/]+/;
@@ -209,7 +208,6 @@ function createWebpackConfig(options) {
     output: {
       filename: outFile,
       path: outDir,
-      publicPath: options.outDir.replace(MATCHES_LEADING_DOT_SLASHES, ''),
     },
     module: {
       rules,
@@ -222,6 +220,7 @@ function createWebpackConfig(options) {
     },
     devServer: {
       contentBase: CWD,
+      publicPath: options.outDir.replace(MATCHES_LEADING_DOT_SLASHES, ''),
       port: PORT,
       host: HOST,
       historyApiFallback: true,
