@@ -4,10 +4,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CWD = process.cwd();
-const POLYFILLS = [
-  require.resolve('babel-polyfill'),
-  require.resolve('raf/polyfill'),
-];
+const POLYFILLS = [require.resolve('raf/polyfill')];
 const MATCHES_LEADING_DOT = /^\./;
 
 function validateOptions(options) {
@@ -191,9 +188,10 @@ function createWebpackConfig(options) {
             babelrc: false,
             presets: [
               [
-                require.resolve('babel-preset-env'),
+                require.resolve('@babel/preset-env'),
                 {
                   modules: false,
+                  useBuiltIns: 'usage',
                 },
               ],
             ],
