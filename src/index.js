@@ -4,6 +4,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CWD = process.cwd();
+
 const POLYFILLS = [
   require.resolve('babel-polyfill'),
   require.resolve('raf/polyfill'),
@@ -195,9 +196,10 @@ function createWebpackConfig(options) {
             babelrc: false,
             presets: [
               [
-                require.resolve('babel-preset-env'),
+                require.resolve('@babel/preset-env'),
                 {
                   modules: false,
+                  useBuiltIns: 'usage',
                 },
               ],
             ],

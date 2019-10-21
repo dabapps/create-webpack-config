@@ -304,7 +304,6 @@ describe('createWebpackConfig', () => {
     });
 
     expect(config.entry).toEqual([
-      require.resolve('babel-polyfill'),
       require.resolve('raf/polyfill'),
       path.resolve(CWD, 'src/index.ts'),
     ]);
@@ -335,12 +334,10 @@ describe('createWebpackConfig', () => {
 
     expect(config.entry).toEqual({
       frontend: [
-        require.resolve('babel-polyfill'),
         require.resolve('raf/polyfill'),
         path.resolve(CWD, 'src/index.ts'),
       ],
       admin: [
-        require.resolve('babel-polyfill'),
         require.resolve('raf/polyfill'),
         path.resolve(CWD, 'src/admin.ts'),
       ],

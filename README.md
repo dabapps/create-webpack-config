@@ -27,7 +27,7 @@ npm i @dabapps/create-webpack-config -S
 Install peer dependencies (TypeScript must be at least version 2):
 
 ```shell
-npm i typescript webpack-cli@3 -S
+npm i typescript@2 webpack-cli@3 webpack@4 @babel/polyfill@7 -S
 ```
 
 ## Setup
@@ -198,3 +198,7 @@ Add the following scripts to your `package.json`.
   }
 }
 ```
+
+## Code of conduct
+
+For guidelines regarding the code of conduct when contributing to this repository please review [https://www.dabapps.com/open-source/code-of-conduct/](https://www.dabapps.com/open-source/code-of-conduct/)
