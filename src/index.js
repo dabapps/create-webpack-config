@@ -192,6 +192,7 @@ function createWebpackConfig(options) {
                 {
                   modules: false,
                   useBuiltIns: 'usage',
+                  corejs: { version: 3 },
                 },
               ],
             ],
