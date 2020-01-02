@@ -317,9 +317,9 @@ describe('createWebpackConfig', () => {
       '^': path.resolve(CWD, 'src/'),
     });
 
-    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      [path.resolve(CWD, 'src/')]
-    );
+    expect(
+      config.module.rules[config.module.rules.length - 1].include
+    ).toEqual([path.resolve(CWD, 'src/')]);
   });
 
   it('should bundle multiple entries', () => {
@@ -352,9 +352,9 @@ describe('createWebpackConfig', () => {
       '^': path.resolve(CWD, 'src/'),
     });
 
-    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      [path.resolve(CWD, 'src/')]
-    );
+    expect(
+      config.module.rules[config.module.rules.length - 1].include
+    ).toEqual([path.resolve(CWD, 'src/')]);
   });
 
   it('should error if multiple entries are in different directories and no rootDir provided', () => {
@@ -386,9 +386,12 @@ describe('createWebpackConfig', () => {
       '^': path.resolve(CWD, 'src'),
     });
 
-    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      [path.resolve(CWD, 'src/frontend'), path.resolve(CWD, 'src/admin')]
-    );
+    expect(
+      config.module.rules[config.module.rules.length - 1].include
+    ).toEqual([
+      path.resolve(CWD, 'src/frontend'),
+      path.resolve(CWD, 'src/admin'),
+    ]);
   });
 
   it('should add include options to includes (single include)', () => {
@@ -407,13 +410,13 @@ describe('createWebpackConfig', () => {
       '^': path.resolve(CWD, 'src'),
     });
 
-    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      [
-        path.resolve(CWD, 'examples'),
-        path.resolve(CWD, 'src/frontend'),
-        path.resolve(CWD, 'src/admin'),
-      ]
-    );
+    expect(
+      config.module.rules[config.module.rules.length - 1].include
+    ).toEqual([
+      path.resolve(CWD, 'examples'),
+      path.resolve(CWD, 'src/frontend'),
+      path.resolve(CWD, 'src/admin'),
+    ]);
   });
 
   it('should add include options to includes (array of includes)', () => {
@@ -432,14 +435,14 @@ describe('createWebpackConfig', () => {
       '^': path.resolve(CWD, 'src'),
     });
 
-    expect(config.module.rules[config.module.rules.length - 1].include).toEqual(
-      [
-        path.resolve(CWD, 'examples'),
-        path.resolve(CWD, 'docs'),
-        path.resolve(CWD, 'src/frontend'),
-        path.resolve(CWD, 'src/admin'),
-      ]
-    );
+    expect(
+      config.module.rules[config.module.rules.length - 1].include
+    ).toEqual([
+      path.resolve(CWD, 'examples'),
+      path.resolve(CWD, 'docs'),
+      path.resolve(CWD, 'src/frontend'),
+      path.resolve(CWD, 'src/admin'),
+    ]);
   });
 
   it('should use rootDir if provided', () => {
