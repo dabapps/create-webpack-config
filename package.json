@@ -4,11 +4,12 @@
   "description": "A utility for creating webpack configs with common settings",
   "main": "src/index.js",
   "scripts": {
+    "build": "rm -rf ./test-files/build/ && webpack --mode production",
     "prettier": "prettier --write '@(src|tests)/**/*.@(ts|tsx|js|jsx)'",
     "prettier-check": "diffs=$(prettier --list-different '@(src|tests)/**/*.@(ts|tsx|js|jsx)'); if [[ ! -z $diffs ]]; then echo \"Run 'npm run prettier'\nThe following files need formatting:\n$diffs\" && exit 1; fi;",
     "tests": "jest",
     "lint": "eslint src tests",
-    "test": "npm run prettier-check && npm run lint && npm run tests -- --coverage --runInBand"
+    "test": "npm run prettier-check && npm run lint && npm run tests -- --coverage --runInBand && npm run build"
   },
   "repository": {
     "type": "git",
