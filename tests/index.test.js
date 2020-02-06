@@ -7,7 +7,6 @@ jest.mock('webpack', () => ({
   EnvironmentPlugin: jest.fn(),
 }));
 jest.mock('circular-dependency-plugin', () => jest.fn());
-jest.mock('fork-ts-checker-webpack-plugin', () => jest.fn());
 
 const { EnvironmentPlugin } = require('webpack');
 

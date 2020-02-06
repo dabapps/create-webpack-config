@@ -1,7 +1,6 @@
 const { EnvironmentPlugin } = require('webpack');
 const path = require('path');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CWD = process.cwd();
 const POLYFILLS = [require.resolve('raf/polyfill')];
@@ -233,7 +232,6 @@ function createWebpackConfig(options) {
       },
     },
     plugins: [
-      new ForkTsCheckerWebpackPlugin(),
       new CircularDependencyPlugin({
         failOnError: true,
         exclude: /node_modules/,
