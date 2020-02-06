@@ -158,6 +158,7 @@ function createFileExtensionRegex(options) {
     })
     .join('|');
 
+  // eslint-disable-next-line no-useless-escape
   return new RegExp(`\\.(?:${joinedExtensions})\$`);
 }
 
