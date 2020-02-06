@@ -50,10 +50,9 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-dabapps": "^5.0.0",
     "jest": "^25.0.0",
     "prettier": "^1.19.1",
-    "tslint": "^5.20.1"
+    "eslint-config-dabapps": "git+https://github.com/dabapps/eslint-config-dabapps#eslint-typescript"
   },
   "peerDependencies": {
     "core-js": "3",
