@@ -7,6 +7,30 @@ const CWD = process.cwd();
 const POLYFILLS = [require.resolve('raf/polyfill')];
 const MATCHES_LEADING_DOT = /^\./;
 
+const BABEL_BASE_PRESETS = [
+  [
+    require.resolve('@babel/preset-env'),
+    {
+      modules: false,
+      useBuiltIns: 'usage',
+      corejs: { version: 3 },
+    },
+  ],
+  require.resolve('@babel/preset-react'),
+];
+
+const BABEL_BASE_PLUGINS = [
+  require.resolve('@babel/plugin-proposal-class-properties'),
+  require.resolve('@babel/plugin-proposal-object-rest-spread'),
+];
+
+const BABEL_TYPESCRIPT_PRESETS = BABEL_BASE_PRESETS.concat(
+  require.resolve('@babel/preset-typescript')
+);
+const BABEL_TYPESCRIPT_PLUGINS = BABEL_BASE_PLUGINS.concat(
+  require.resolve('babel-plugin-const-enum')
+);
+
 function validateOptions(options) {
   if (!options || typeof options !== 'object' || Array.isArray(options)) {
     throw new Error('Invalid config options - must be an object');
@@ -180,29 +204,28 @@ function createWebpackConfig(options) {
         }
       : null,
     {
-      test: /\.[tj]sx?$/,
+      test: /\.jsx?$/,
       use: [
         {
           loader: require.resolve('babel-loader'),
           options: {
             babelrc: false,
-            presets: [
-              [
-                require.resolve('@babel/preset-env'),
-                {
-                  modules: false,
-                  useBuiltIns: 'usage',
-                  corejs: { version: 3 },
-                },
-              ],
-            ],
+            presets: BABEL_BASE_PRESETS,
+            plugins: BABEL_BASE_PLUGINS,
           },
         },
+      ],
+      include: includeDirs,
+    },
+    {
+      test: /\.tsx?$/,
+      use: [
         {
-          loader: require.resolve('ts-loader'),
+          loader: require.resolve('babel-loader'),
           options: {
-            transpileOnly: true,
-            configFile: path.resolve(CWD, options.tsconfig),
+            babelrc: false,
+            presets: BABEL_TYPESCRIPT_PRESETS,
+            plugins: BABEL_TYPESCRIPT_PLUGINS,
           },
         },
       ],
