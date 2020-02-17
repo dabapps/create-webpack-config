@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const path = require('path');
 const createWebpackConfig = require('../src');
 
@@ -475,15 +476,16 @@ describe('createWebpackConfig', () => {
       rawFileExtensions: [],
     });
 
-    expect(config1.module.rules.length).toBe(1);
-    expect(config1.module.rules[0].use[0].loader).toBe(
-      require.resolve('babel-loader')
-    );
+    const babelLoader = require.resolve('babel-loader');
 
-    expect(config2.module.rules.length).toBe(1);
-    expect(config2.module.rules[0].use[0].loader).toBe(
-      require.resolve('babel-loader')
-    );
+    expect(config1.module.rules.length).toBe(2);
+    expect(
+      config1.module.rules.every(rule => rule.use[0].loader === babelLoader)
+    ).toBe(true);
+    expect(config2.module.rules.length).toBe(2);
+    expect(
+      config2.module.rules.every(rule => rule.use[0].loader === babelLoader)
+    ).toBe(true);
   });
 
   it('should create a regex for raw files', () => {
@@ -499,24 +501,6 @@ describe('createWebpackConfig', () => {
     expect(typeof rawLoaderRule).toBe('object');
     expect(rawLoaderRule.use).toBe(require.resolve('raw-loader'));
     expect(rawLoaderRule.test).toEqual(/\.(?:html|txt|xml|csv)$/);
-  });
-
-  it('should set the tsconfig path', () => {
-    const config = createWebpackConfig({
-      input: 'src/index.ts',
-      outDir: 'dist',
-      tsconfig: 'tsconfig.json',
-    });
-
-    const tsLoaderRule =
-      config.module.rules[config.module.rules.length - 1].use[1];
-
-    expect(typeof tsLoaderRule).toBe('object');
-    expect(tsLoaderRule.loader).toBe(require.resolve('ts-loader'));
-    expect(tsLoaderRule.options).toEqual({
-      transpileOnly: true,
-      configFile: path.resolve(CWD, 'tsconfig.json'),
-    });
   });
 
   it('should work without environment variables', () => {
