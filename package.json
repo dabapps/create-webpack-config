@@ -48,16 +48,16 @@
     "fork-ts-checker-webpack-plugin": "^0.4.15",
     "raf": "^3.4.1",
     "raw-loader": "^0.5.1",
-    "tslint": "^5.20.1",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-dabapps": "github:dabapps/eslint-config-dabapps#v3.2.1",
+    "eslint": "^6.8.0",
+    "eslint-config-dabapps": "^5.0.0",
     "jest": "^25.0.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1"
   },
   "peerDependencies": {
     "core-js": "3",
