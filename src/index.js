@@ -1,4 +1,5 @@
 const { EnvironmentPlugin } = require('webpack');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const path = require('path');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
