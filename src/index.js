@@ -238,9 +238,7 @@ function createWebpackConfig(options) {
     performance: {
       hints: false,
     },
-    stats: {
-      timings: true,
-    },
+    stats: 'errors-warnings',
     devtool: 'source-map',
     entry,
     output: {
