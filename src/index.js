@@ -253,6 +253,7 @@ function createWebpackConfig(options) {
       alias: {
         '^': rootDir,
       },
+      modules: 'node_modules',
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin(),
