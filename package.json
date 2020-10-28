@@ -1,12 +1,12 @@
 {
   "name": "@dabapps/create-webpack-config",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "A utility for creating webpack configs with common settings",
   "main": "src/index.js",
   "scripts": {
     "build": "rm -rf ./test-files/build/ && webpack --mode production",
-    "prettier": "prettier --write '@(src|tests)/**/*.@(ts|tsx|js|jsx)'",
-    "prettier-check": "diffs=$(prettier --list-different '@(src|tests)/**/*.@(ts|tsx|js|jsx)'); if [[ ! -z $diffs ]]; then echo \"Run 'npm run prettier'\nThe following files need formatting:\n$diffs\" && exit 1; fi;",
+    "prettier": "prettier --write '**/*.{ts,tsx,js,jsx,json,md,mk,html,yml}'",
+    "prettier-check": "prettier --check '**/*.{ts,tsx,js,jsx,json,md,mk,html,yml}'",
     "tests": "jest",
     "lint": "eslint src tests",
     "test": "npm run prettier-check && npm run lint && npm run tests -- --coverage --runInBand && npm run build"
@@ -35,35 +35,35 @@
   },
   "homepage": "https://github.com/dabapps/create-webpack-config#readme",
   "dependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/preset-typescript": "^7.8.3",
-    "babel-loader": "^8.0.6",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "babel-loader": "^8.1.0",
     "babel-plugin-const-enum": "0.0.5",
     "circular-dependency-plugin": "^5.2.0",
-    "core-js": "^3.6.1",
-    "fork-ts-checker-webpack-plugin": "^0.4.15",
+    "core-js": "^3.6.5",
+    "fork-ts-checker-webpack-plugin": "^5.2.1",
     "raf": "^3.4.1",
-    "raw-loader": "^0.5.1",
-    "typescript": "^3.7.4",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "raw-loader": "^4.0.2",
+    "typescript": "^3.9.7",
+    "webpack": "^5.3.0",
+    "webpack-cli": "^4.1.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-dabapps": "^5.0.0",
-    "jest": "^25.0.0",
+    "eslint-config-dabapps": "^5.1.1",
+    "jest": "^25.5.4",
     "prettier": "^1.19.1",
     "tslint": "^5.20.1"
   },
   "peerDependencies": {
     "core-js": "3",
     "typescript": ">= 2",
-    "webpack": "4",
-    "webpack-cli": "3"
+    "webpack": "5",
+    "webpack-cli": "4"
   },
   "publishConfig": {
     "access": "public"
