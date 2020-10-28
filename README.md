@@ -8,13 +8,13 @@ This utility will create a webpack config that should function as a drop-in for 
 
 It features:
 
-* Tree shaking
-* Circular dependency checking
-* Synthetic default imports (TypeScript)
-* Project root alias (`^`)
-* Type checking in separate worker
-* Transpiling from ES6+ (and React) to target browsers
-* Polyfilling ES6+ features
+- Tree shaking
+- Circular dependency checking
+- Synthetic default imports (TypeScript)
+- Project root alias (`^`)
+- Type checking in separate worker
+- Transpiling from ES6+ (and React) to target browsers
+- Polyfilling ES6+ features
 
 ## Node support
 
@@ -43,6 +43,7 @@ Create a file called `webpack.config.js` and add the following contents, adjusti
 This will bundle your `index.ts` file and all dependencies into a `bundle.js` in the `static/build/js` directory.
 
 `webpack.config.js`
+
 ```js
 const createWebpackConfig = require('@dabapps/create-webpack-config');
 
@@ -51,8 +52,8 @@ module.exports = createWebpackConfig({
   outDir: './static/build/js',
   tsconfig: './tsconfig.dist.json',
   env: {
-    NODE_ENV: 'production'
-  }
+    NODE_ENV: 'production',
+  },
 });
 ```
 
@@ -61,19 +62,20 @@ If you require multiple bundles you can supply an object as the `input`. Files w
 The following config will create `static/build/js/frontend-bundle.js` and `static/build/js/admin-bundle.js`.
 
 `webpack.config.js`
+
 ```js
 const createWebpackConfig = require('@dabapps/create-webpack-config');
 
 module.exports = createWebpackConfig({
   input: {
     frontend: './static/src/ts/index.ts',
-    admin: './static/src/ts/admin.ts'
+    admin: './static/src/ts/admin.ts',
   },
   outDir: './static/build/js',
   tsconfig: './tsconfig.dist.json',
   env: {
-    NODE_ENV: 'production'
-  }
+    NODE_ENV: 'production',
+  },
 });
 ```
 
@@ -81,7 +83,7 @@ If you would like to be able to import "raw" files as strings, you can provide a
 
 ```js
 {
-  rawFileExtensions: ['html', 'xml', 'txt', 'csv']
+  rawFileExtensions: ['html', 'xml', 'txt', 'csv'];
 }
 ```
 
@@ -115,6 +117,7 @@ Create a `.browserslistrc` file in the root of your project and add the followin
 This file is used by webpack, and other tools such as autoprefixer to make our code compatible with the browsers we want to support.
 
 `.browserslistrc`
+
 ```
 last 10 Chrome versions
 last 10 Firefox versions
@@ -140,6 +143,7 @@ You may enable type checking on Javascript files by setting `checkJs` to `true`.
 `allowSyntheticDefaultImports` and `esModuleInterop` allow us to import modules that don't have default exports as if they did, in TypeScript, so that we can be consistent across Javascript and TypeScript projects. E.g. `import React from 'react';` as opposed to `import * as React from 'react';`
 
 `tsconfig.json`
+
 ```json
 {
   "compilerOptions": {
@@ -155,20 +159,13 @@ You may enable type checking on Javascript files by setting `checkJs` to `true`.
     "jsx": "react",
     "target": "es6",
     "moduleResolution": "node",
-    "typeRoots": [
-      "./node_modules/@types/",
-      "./static/src/ts/types/"
-    ],
+    "typeRoots": ["./node_modules/@types/", "./static/src/ts/types/"],
     "baseUrl": "./",
     "paths": {
-      "^*": [
-        "./static/src/ts*"
-      ]
+      "^*": ["./static/src/ts*"]
     }
   },
-  "include": [
-    "./static/src/ts/"
-  ]
+  "include": ["./static/src/ts/"]
 }
 ```
 
@@ -179,13 +176,11 @@ Create a `tsconfig.dist.json` file in the root of your project and add the follo
 This is necessary to allow us to build our source without also type checking our tests or other Javascript and TypeScript files in the project.
 
 `tsconfig.dist.json`
+
 ```json
 {
   "extends": "./tsconfig.json",
-  "exclude": [
-    "./static/src/ts/__tests__/",
-    "./static/src/ts/__mocks__/"
-  ]
+  "exclude": ["./static/src/ts/__tests__/", "./static/src/ts/__mocks__/"]
 }
 ```
 
@@ -194,6 +189,7 @@ This is necessary to allow us to build our source without also type checking our
 Add the following scripts to your `package.json`.
 
 `package.json`
+
 ```json
 {
   "scripts": {

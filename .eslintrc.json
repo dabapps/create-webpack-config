@@ -1,11 +1,4 @@
 {
-  "extends": [
-    "dabapps/es6",
-    "dabapps/commonjs",
-    "dabapps/node",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ]
+  "extends": ["dabapps/es6", "dabapps/commonjs", "dabapps/node", "prettier"],
+  "plugins": ["prettier"]
 }
