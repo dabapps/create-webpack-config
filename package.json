@@ -62,8 +62,8 @@
   "peerDependencies": {
     "core-js": "3",
     "typescript": ">= 2",
-    "webpack": "4",
-    "webpack-cli": "3"
+    "webpack": "5",
+    "webpack-cli": "4"
   },
   "publishConfig": {
     "access": "public"
