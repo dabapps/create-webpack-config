@@ -27,7 +27,7 @@ npm i @dabapps/create-webpack-config -S
 Install peer dependencies (TypeScript must be at least version 2):
 
 ```shell
-npm i typescript webpack@4 webpack-cli@3 core-js@3 -S
+npm i typescript webpack@5 webpack-cli@4 core-js@3 -S
 ```
 
 ## Setup
