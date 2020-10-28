@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "rm -rf ./test-files/build/ && webpack --mode production",
-    "prettier": "prettier --write '{src,tests}/**/*.{ts,tsx,js,jsx}'",
-    "prettier-check": "prettier --check '{src,tests}/**/*.{ts,tsx,js,jsx}'",
+    "prettier": "prettier --write '**/*.{ts,tsx,js,jsx,json,md,mk,html,yml}'",
+    "prettier-check": "prettier --check '**/*.{ts,tsx,js,jsx,json,md,mk,html,yml}'",
     "tests": "jest",
     "lint": "eslint src tests",
     "test": "npm run prettier-check && npm run lint && npm run tests -- --coverage --runInBand && npm run build"
