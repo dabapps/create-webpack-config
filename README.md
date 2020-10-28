@@ -16,6 +16,10 @@ It features:
 * Transpiling from ES6+ (and React) to target browsers
 * Polyfilling ES6+ features
 
+## Node support
+
+As of version `0.4` Node less than `10.13` is not supported.
+
 ## Installation
 
 Install `@dabapps/create-webpack-config`:
