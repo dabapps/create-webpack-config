@@ -1,6 +1,6 @@
 {
   "name": "@dabapps/create-webpack-config",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A utility for creating webpack configs with common settings",
   "main": "src/index.js",
   "scripts": {
