@@ -62,6 +62,7 @@
   "peerDependencies": {
     "@babel/core": "7",
     "@babel/generator": "7",
+    "@babel/runtime": "7",
     "core-js": "3",
     "typescript": ">= 2",
     "webpack": "5",
