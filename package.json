@@ -42,7 +42,7 @@
     "@babel/preset-react": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
     "babel-loader": "^8.2.2",
-    "babel-plugin-const-enum": "0.0.5",
+    "babel-plugin-const-enum": "^1.0.1",
     "circular-dependency-plugin": "^5.2.2",
     "core-js": "^3.8.0",
     "fork-ts-checker-webpack-plugin": "^6.0.4",
