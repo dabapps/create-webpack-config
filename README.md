@@ -199,6 +199,28 @@ Add the following scripts to your `package.json`.
 }
 ```
 
+### Skipping type checking
+
+For builds that have already been type checked you may want to skip type checking. This can be done by enabling the `skipTypeChecking` option e.g.
+
+```js
+module.exports = createWebpackConfig({
+  // ...
+  skipTypeChecking: true,
+});
+```
+
+### Skipping circular dependency checks
+
+For builds that have already been checked for circular dependencies you may want to skip this step. This can be done by enabling the `skipCircularDependencyChecking` option e.g.
+
+```js
+module.exports = createWebpackConfig({
+  // ...
+  skipCircularDependencyChecking: true,
+});
+```
+
 ## Code of conduct
 
 For guidelines regarding the code of conduct when contributing to this repository please review [https://www.dabapps.com/open-source/code-of-conduct/](https://www.dabapps.com/open-source/code-of-conduct/)

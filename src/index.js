@@ -234,6 +234,26 @@ function createWebpackConfig(options) {
     },
   ].filter(rule => Boolean(rule));
 
+  const typeCheckerPlugins = options.skipTypeChecking
+    ? []
+    : [
+        new ForkTsCheckerWebpackPlugin({
+          typescript: {
+            configFile: path.resolve(process.cwd(), options.tsconfig),
+          },
+        }),
+      ];
+
+  const circularDependencyPlugins = options.skipCircularDependencyChecking
+    ? []
+    : [
+        new CircularDependencyPlugin({
+          failOnError: true,
+          exclude: /node_modules/,
+          cwd: CWD,
+        }),
+      ];
+
   return {
     performance: {
       hints: false,
@@ -255,16 +275,8 @@ function createWebpackConfig(options) {
       },
     },
     plugins: [
-      new ForkTsCheckerWebpackPlugin({
-        typescript: {
-          configFile: path.resolve(process.cwd(), options.tsconfig),
-        },
-      }),
-      new CircularDependencyPlugin({
-        failOnError: true,
-        exclude: /node_modules/,
-        cwd: CWD,
-      }),
+      ...typeCheckerPlugins,
+      ...circularDependencyPlugins,
       new EnvironmentPlugin(options.env || {}),
     ],
   };
