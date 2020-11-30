@@ -527,4 +527,66 @@ describe('createWebpackConfig', () => {
       NODE_ENV: 'production',
     });
   });
+
+  it('should not include fork-ts-checker-webpack-plugin when skipTypeChecking is enabled', () => {
+    const config = createWebpackConfig({
+      input: 'test',
+      outDir: 'test',
+      tsconfig: 'test',
+      skipTypeChecking: false,
+    });
+
+    expect(config.plugins.length).toBe(3);
+
+    const noCheckConfig = createWebpackConfig({
+      input: 'test',
+      outDir: 'test',
+      tsconfig: 'test',
+      skipTypeChecking: true,
+    });
+
+    expect(noCheckConfig.plugins.length).toBe(2);
+  });
+
+  it('should not include circular-dependency-plugin when skipCircularDependencyChecking is enabled', () => {
+    const config = createWebpackConfig({
+      input: 'test',
+      outDir: 'test',
+      tsconfig: 'test',
+      skipCircularDependencyChecking: false,
+    });
+
+    expect(config.plugins.length).toBe(3);
+
+    const noCheckConfig = createWebpackConfig({
+      input: 'test',
+      outDir: 'test',
+      tsconfig: 'test',
+      skipCircularDependencyChecking: true,
+    });
+
+    expect(noCheckConfig.plugins.length).toBe(2);
+  });
+
+  it('should not include fork-ts-checker-webpack-plugin and circular-dependency-plugin when skipTypeChecking and skipCircularDependencyChecking are enabled', () => {
+    const config = createWebpackConfig({
+      input: 'test',
+      outDir: 'test',
+      tsconfig: 'test',
+      skipTypeChecking: false,
+      skipCircularDependencyChecking: false,
+    });
+
+    expect(config.plugins.length).toBe(3);
+
+    const noCheckConfig = createWebpackConfig({
+      input: 'test',
+      outDir: 'test',
+      tsconfig: 'test',
+      skipTypeChecking: true,
+      skipCircularDependencyChecking: true,
+    });
+
+    expect(noCheckConfig.plugins.length).toBe(1);
+  });
 });
