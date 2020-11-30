@@ -1,6 +1,6 @@
 {
   "name": "@dabapps/create-webpack-config",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "A utility for creating webpack configs with common settings",
   "main": "src/index.js",
   "scripts": {
@@ -60,6 +60,8 @@
     "tslint": "^5.20.1"
   },
   "peerDependencies": {
+    "@babel/core": "7",
+    "@babel/generator": "7",
     "core-js": "3",
     "typescript": ">= 2",
     "webpack": "5",
