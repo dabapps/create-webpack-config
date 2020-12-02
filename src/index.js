@@ -5,8 +5,16 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const CWD = process.cwd();
-const POLYFILLS = [require.resolve('raf/polyfill')];
+
+const POLYFILLS = [
+  require.resolve('babel-polyfill'),
+  require.resolve('raf/polyfill'),
+];
+
+const { HOST = '0.0.0.0', PORT = 3000 } = process.env;
+
 const MATCHES_LEADING_DOT = /^\./;
+const MATCHES_LEADING_DOT_SLASHES = /^[\.\/]+/;
 
 const BABEL_BASE_PRESETS = [
   [
@@ -273,6 +281,13 @@ function createWebpackConfig(options) {
       alias: {
         '^': rootDir,
       },
+    },
+    devServer: {
+      contentBase: CWD,
+      publicPath: options.outDir.replace(MATCHES_LEADING_DOT_SLASHES, ''),
+      port: PORT,
+      host: HOST,
+      historyApiFallback: true,
     },
     plugins: [
       ...typeCheckerPlugins,
