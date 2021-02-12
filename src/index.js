@@ -258,7 +258,9 @@ function createWebpackConfig(options) {
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin({
-        tsconfig: path.resolve(process.cwd(), options.tsconfig),
+        typescript: {
+          configFile: path.resolve(process.cwd(), options.tsconfig),
+        },
       }),
       new CircularDependencyPlugin({
         failOnError: true,
